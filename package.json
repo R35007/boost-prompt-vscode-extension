@@ -1,0 +1,139 @@
+{
+  "name": "boost-prompt",
+  "publisher": "thinker",
+  "displayName": "Boost Prompt",
+  "description": "Tools for enhancing prompt interactions.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/R35007/boost-prompt-vscode-extension"
+  },
+  "icon": "resources/icon.png",
+  "license": "MIT",
+  "version": "0.9.0",
+  "engines": {
+    "vscode": "^1.99.0",
+    "node": "^v23.0.0"
+  },
+  "categories": [
+    "AI",
+    "Chat"
+  ],
+  "keywords": [
+	"boost prompt",
+	"prompt boost",
+	"prompt engineering",
+	"AI tools",
+	"copilot chat",
+	"prompt editing",
+	"VSCode AI",
+	"VSCode Copilot"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "boostPrompt.boost",
+        "title": "Boost Prompt"
+      },
+      {
+        "command": "boostPrompt.selectModel",
+        "title": "Boost Prompt: Select Model",
+        "category": "Boost Prompt"
+      },
+      {
+        "command": "boostPrompt.editInstructions",
+        "title": "Boost Prompt: Edit Instructions",
+        "category": "Boost Prompt"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "boostPrompt.boost",
+          "when": "boostPrompt.filePatternMatches",
+          "group": "1_modification"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "boostPrompt.boost",
+          "when": "boostPrompt.filePatternMatches",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": [
+      {
+        "title": "Boost Prompt",
+        "properties": {
+          "boostPrompt.preferredModel": {
+            "type": "string",
+            "default": "",
+            "description": "Preferred language model for boosting prompts. Leave empty to select on each boost.",
+            "scope": "application"
+          },
+          "boostPrompt.filePatterns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": [
+              "*.prompt.md"
+            ],
+            "description": "Array of glob patterns for files to enable Boost Prompt on. Examples: *.prompt.md, *.md, **/*.mdx",
+            "scope": "application"
+          }
+        }
+      }
+    ],
+    "languageModelTools": [
+      {
+        "name": "boostPrompt",
+        "tags": [
+          "prompt",
+          "editing",
+          "tools"
+        ],
+        "toolReferenceName": "boostPrompt",
+        "displayName": "Boost Prompt Tools",
+        "modelDescription": "Boost the quality of your prompts",
+        "canBeReferencedInPrompt": true,
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "promptText": {
+              "type": "string",
+              "description": "The prompt text to improve"
+            }
+          },
+          "required": [
+            "promptText"
+          ]
+        }
+      }
+    ]
+  },
+  "main": "./out/extension.js",
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "lint": "eslint",
+    "watch": "tsc -watch -p ./"
+  },
+  "dependencies": {
+    "@vscode/chat-extension-utils": "^0.0.0-alpha.1",
+    "@vscode/prompt-tsx": "^0.3.0-alpha.12",
+    "minimatch": "^10.2.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "@stylistic/eslint-plugin": "^2.9.0",
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.95.0",
+    "eslint": "^9.13.0",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.26.0"
+  }
+}
