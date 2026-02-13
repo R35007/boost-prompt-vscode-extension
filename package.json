@@ -9,7 +9,7 @@
   },
   "icon": "resources/icon.png",
   "license": "MIT",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.99.0",
     "node": "^v23.0.0"
@@ -19,14 +19,14 @@
     "Chat"
   ],
   "keywords": [
-	"boost prompt",
-	"prompt boost",
-	"prompt engineering",
-	"AI tools",
-	"copilot chat",
-	"prompt editing",
-	"VSCode AI",
-	"VSCode Copilot"
+    "boost prompt",
+    "prompt boost",
+    "prompt engineering",
+    "AI tools",
+    "copilot chat",
+    "prompt editing",
+    "VSCode AI",
+    "VSCode Copilot"
   ],
   "activationEvents": [
     "onStartupFinished"
