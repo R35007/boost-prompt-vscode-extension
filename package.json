@@ -2,17 +2,16 @@
   "name": "boost-prompt",
   "publisher": "thinker",
   "displayName": "Boost Prompt",
-  "description": "Tools for enhancing prompt interactions.",
+  "description": "Boosts your prompts by expanding and enhancing them into richer, more powerful inputs.",
   "repository": {
     "type": "git",
     "url": "https://github.com/R35007/boost-prompt-vscode-extension"
   },
   "icon": "resources/icon.png",
   "license": "MIT",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "engines": {
-    "vscode": "^1.99.0",
-    "node": "^v23.0.0"
+    "vscode": "^1.109.0"
   },
   "categories": [
     "AI",
@@ -21,6 +20,7 @@
   "keywords": [
     "boost prompt",
     "prompt boost",
+    "enhance prompt",
     "prompt engineering",
     "AI tools",
     "copilot chat",
@@ -31,6 +31,7 @@
   "activationEvents": [
     "onStartupFinished"
   ],
+  "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
@@ -52,15 +53,15 @@
       "editor/context": [
         {
           "command": "boostPrompt.boost",
-          "when": "boostPrompt.filePatternMatches",
+          "when": "boostPrompt.filePatternMatches && editorTextFocus",
           "group": "1_modification"
         }
       ],
       "editor/title": [
         {
           "command": "boostPrompt.boost",
-          "when": "boostPrompt.filePatternMatches",
-          "group": "navigation"
+          "when": "boostPrompt.filePatternMatches && editorTextFocus",
+          "group": "navigation@1"
         }
       ]
     },
@@ -115,25 +116,29 @@
       }
     ]
   },
-  "main": "./out/extension.js",
   "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "lint": "eslint",
-    "watch": "tsc -watch -p ./"
-  },
-  "dependencies": {
-    "@vscode/chat-extension-utils": "^0.0.0-alpha.1",
-    "@vscode/prompt-tsx": "^0.3.0-alpha.12",
-    "minimatch": "^10.2.0"
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
   },
   "devDependencies": {
-    "@eslint/js": "^9.13.0",
-    "@stylistic/eslint-plugin": "^2.9.0",
-    "@types/node": "^20.0.0",
-    "@types/vscode": "^1.95.0",
-    "eslint": "^9.13.0",
-    "typescript": "^5.8.2",
-    "typescript-eslint": "^8.26.0"
+    "@types/node": "22.x",
+    "@types/vscode": "^1.109.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "esbuild": "^0.27.2",
+    "eslint": "^9.39.2",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.54.0"
+  },
+  "dependencies": {
+    "minimatch": "^10.2.0"
   }
 }

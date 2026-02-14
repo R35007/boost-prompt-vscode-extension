@@ -3,7 +3,9 @@
 > Tools for improving and refining textual prompts directly inside VS Code.
 ---
 
-[![Buy Me a Coffee](https://r35007.github.io/Siva_Profile/images//buymeacoffee.png)](https://buymeacoffee.com/r35007)
+<a href="https://buymeacoffee.com/r35007" target="_blank">
+  <img src="https://r35007.github.io/Siva_Profile/images//buymeacoffee.png" />
+</a>
 
 
 Boost Prompt helps you turn a rough prompt into a clear, actionable, and well-formatted request for language models (Copilot Chat and compatible models).
@@ -56,11 +58,3 @@ When invoked, the extension reads your `boost.prompt.md` instructions (created a
 ## Extensibility
 
 Boost Prompt exposes a `languageModelTools` contribution (`boostPrompt`) so other extensions or model-driven flows can reference the tool and pass `promptText` directly.
-
-## Privacy
-
-The extension sends prompt text to the selected language model provider (Copilot-compatible models). Treat sensitive data carefully and consult your organization's policies before sending private content to external models.
-
----
-
-If you'd like, I can also add a short changelog section, example workflows, or a README badge linking to the Marketplace or CI — tell me which and I'll update the file.

@@ -1,32 +1,22 @@
-/**
- * ESLint configuration for the project.
- *
- * See https://eslint.style and https://typescript-eslint.io for additional linting options.
- */
-// @ts-check
-import js from "@eslint/js";
-import stylistic from "@stylistic/eslint-plugin";
-import tseslint from "typescript-eslint";
+import typescriptEslint from "typescript-eslint";
 
-export default tseslint.config(
+export default [
   {
-    ignores: [".vscode-test", "out", "src/cua/cua*.*"],
+    files: ["**/*.ts"],
   },
-  {
-    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
-  },
-  js.configs.recommended,
-  ...tseslint.configs.recommended,
-  ...tseslint.configs.stylistic,
   {
     plugins: {
-      "@stylistic": stylistic,
+      "@typescript-eslint": typescriptEslint.plugin,
     },
+
+    languageOptions: {
+      parser: typescriptEslint.parser,
+      ecmaVersion: 2022,
+      sourceType: "module",
+    },
+
     rules: {
       curly: ["warn", "multi-line"],
-      "@stylistic/semi": ["warn", "always"],
-      "@typescript-eslint/no-empty-function": "off",
-      "@typescript-eslint/array-type": "off",
       "@typescript-eslint/naming-convention": [
         "warn",
         {
@@ -34,12 +24,16 @@ export default tseslint.config(
           format: ["camelCase", "PascalCase"],
         },
       ],
+      "@typescript-eslint/no-empty-function": "off",
       "@typescript-eslint/no-unused-vars": [
         "error",
         {
           argsIgnorePattern: "^_",
         },
       ],
+      eqeqeq: "warn",
+      "no-throw-literal": "warn",
+      semi: "warn",
     },
-  }
-);
+  },
+];
