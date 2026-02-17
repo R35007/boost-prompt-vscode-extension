@@ -9,9 +9,9 @@
   },
   "icon": "resources/icon.png",
   "license": "MIT",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "engines": {
-    "vscode": "^1.109.0"
+    "vscode": "^1.89.0"
   },
   "categories": [
     "AI",
@@ -72,8 +72,7 @@
           "boostPrompt.preferredModel": {
             "type": "string",
             "default": "",
-            "description": "Preferred language model for boosting prompts. Leave empty to select on each boost.",
-            "scope": "application"
+            "description": "Preferred language model for boosting prompts. Leave empty to select on each boost."
           },
           "boostPrompt.filePatterns": {
             "type": "array",
@@ -83,8 +82,7 @@
             "default": [
               "*.prompt.md"
             ],
-            "description": "Array of glob patterns for files to enable Boost Prompt on. Examples: *.prompt.md, *.md, **/*.mdx",
-            "scope": "application"
+            "description": "Array of glob patterns for files to enable Boost Prompt on. Examples: *.prompt.md, *.md, **/*.mdx"
           }
         }
       }
@@ -129,9 +127,7 @@
   },
   "devDependencies": {
     "@types/node": "22.x",
-    "@types/vscode": "^1.109.0",
-    "@vscode/test-cli": "^0.0.12",
-    "@vscode/test-electron": "^2.5.2",
+    "@types/vscode": "^1.89.0",
     "esbuild": "^0.27.2",
     "eslint": "^9.39.2",
     "npm-run-all": "^4.1.5",

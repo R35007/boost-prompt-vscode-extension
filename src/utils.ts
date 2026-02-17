@@ -2,6 +2,7 @@ import * as fs from "fs";
 import { minimatch } from "minimatch";
 import * as path from "path";
 import * as vscode from "vscode";
+import { Settings } from "./Settings";
 
 // Export output channel immediately
 export const boostPromptOutputChannel = vscode.window.createOutputChannel("BoostPrompt");
@@ -55,7 +56,7 @@ export async function selectModel(): Promise<vscode.LanguageModelChat | undefine
 
   if (selected?.model) {
     vscode.window.showInformationMessage(`Selected: ${selected?.model.name}`);
-    await setPreferredModel(selected?.model.name);
+    Settings.preferredModel = selected?.model.name;
     return selected?.model;
   }
 
@@ -63,21 +64,12 @@ export async function selectModel(): Promise<vscode.LanguageModelChat | undefine
   return undefined;
 }
 
-export function getPreferredModel(): string {
-  return vscode.workspace.getConfiguration("boostPrompt").get("preferredModel", "");
-}
-
-export async function setPreferredModel(modelName: string): Promise<void> {
-  await vscode.workspace.getConfiguration("boostPrompt").update("preferredModel", modelName, vscode.ConfigurationTarget.Global);
-  boostPromptOutputChannel.appendLine(`Preferred model updated to: ${modelName}`);
-}
-
 // ============================================================================
 // File Pattern Utilities
 // ============================================================================
 
 export function isBoostEnabledForFile(fileName: string): boolean {
-  const patterns = vscode.workspace.getConfiguration("boostPrompt").get("filePatterns", ["*.prompt.md"]) as string[] | null | undefined;
+  const patterns = Settings.filePatterns;
 
   // Enable for all files if no patterns, empty array, or wildcard
   if (!patterns || patterns.length === 0) {
@@ -176,12 +168,12 @@ export function readInstructionFile(context: vscode.ExtensionContext): string {
 // ============================================================================
 
 export function logPatterns(): void {
-  const patterns = vscode.workspace.getConfiguration("boostPrompt").get("filePatterns", ["*.prompt.md"]) as string[];
+  const patterns = Settings.filePatterns;
   boostPromptOutputChannel.appendLine(`📋 Configured file patterns: [${patterns.join(", ")}]`);
 }
 
 export function getEnabledPatternsMessage(): string {
-  const patterns = vscode.workspace.getConfiguration("boostPrompt").get("filePatterns", ["*.prompt.md"]) as string[];
+  const patterns = Settings.filePatterns;
   return patterns.length > 0 ? patterns.join(", ") : "(empty - enables for all files)";
 }
 
@@ -198,7 +190,7 @@ export async function getSelectedLanguageModel(): Promise<vscode.LanguageModelCh
     return undefined;
   }
 
-  const preferredName = getPreferredModel();
+  const preferredName = Settings.preferredModel;
 
   if (preferredName) {
     const preferred = findModelByName(preferredName);
