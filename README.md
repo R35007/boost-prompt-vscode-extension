@@ -45,10 +45,6 @@ Boost Prompt helps you turn a rough prompt into a clear, actionable, and well-fo
 > [!note]
 > The extension discovers available Copilot-compatible chat models at activation. Make sure Copilot Chat is enabled in your environment.
 
-## How it works
-
-When invoked, the extension reads your `boost.prompt.md` instructions (created automatically on first run), wraps your original prompt inside a small template, and sends that to the selected language model. The model response replaces the original selection (or whole file) when successful. All activity is logged to the `BoostPrompt` output channel.
-
 ## Troubleshooting
 
 - No models found: enable Copilot Chat in VS Code and try again.
