@@ -58,3 +58,10 @@ When invoked, the extension reads your `boost.prompt.md` instructions (created a
 ## Extensibility
 
 Boost Prompt exposes a `languageModelTools` contribution (`boostPrompt`) so other extensions or model-driven flows can reference the tool and pass `promptText` directly.
+
+## 🙏 Acknowledgment
+
+This extension, **Boost Prompt**, was inspired by the original idea from  
+[Chris Dias – Prompt Boost](https://marketplace.visualstudio.com/items?itemName=chrisdias.promptboost).
+
+While this project was built entirely from scratch and not derived from the original codebase, I want to give credit to Chris Dias for the concept that sparked the creation of this extension.
